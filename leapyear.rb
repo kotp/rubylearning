@@ -1,20 +1,9 @@
 def leap_year(year)
-  isleap = false
-  if (year%4  == 0)
-    isleap = true
-    if (year%100 == 0)
-      isleap = false
-      if (year%400 == 0)
-        isleap = true
-      end
-    end
-  end
-  isleap
+  year%100 == 0 ? (year%400 ==0) : (year%4 == 0)
 end
 
-year = 2004
+year = 2003
 
-minutes = 365*24*60
-minutes = minutes + (24*60) if leap_year(year)
+minutes = leap_year(year) ? (366*24*60) : (365*24*60)
 
 puts "Year #{year} has #{minutes} minutes\n"
