@@ -1,3 +1,3 @@
 s = "My name is Christian"
-puts s.split(/\s/).reverse.join(' ')
+puts s.split.reverse.join(' ')
 
