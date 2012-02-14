@@ -4,31 +4,39 @@
 
 filename = ARGV[0]
 
-cc = cc_wos = lc = wc = sc = pc = avg_wps = avg_spp = 0
+info = { :cc => 0,
+         :cc_wos => 0,
+         :lc => 1,
+         :wc => 0,
+         :sc => 0,
+         :pc => 1,
+         :avg_wps => 0,
+         :avg_spp => 0 }
+
 spaces = 0
 
 if File.exists?(filename)
   data  = File.open(filename, 'r+')
   data.each_with_index do |line,index|
-    lc = index
+    info[:lc] = index + 1
     split_blank = line.split(/ /)
-    split_words = line.split(/\s/)
-    split_sentences = line.split(/[\.\!\?]/)
+    split_words = line.split(/[\s\']/)
+    split_sentences = line.chomp.split(/[\.\!\?]/)
     spaces = spaces + split_blank.length
-    wc = wc + split_words.length
-    sc = sc + split_sentences.length
-    pc = pc + 1 if line =~ /^\s$/
+    info[:wc] = info[:wc] + split_words.length
+    info[:sc] = info[:sc] + split_sentences.length
+    info[:pc] = info[:pc] + 1 if line =~ /^\s$/
   end
-  cc = data.pos
-  cc_wos = cc - spaces
-  avg_wps = wc/sc.round
-  avg_spp = sc/pc.round
+  info[:cc] = data.pos
+  info[:cc_wos] = info[:cc] - spaces
+  info[:avg_wps] = info[:wc]/info[:sc].round
+  info[:avg_spp] = info[:sc]/info[:pc].round
 else
   puts "File #{filename} does not exist"
 end
 
-puts "Character: #{cc}, w/o spaces: #{cc_wos}"
-puts "Lines: #{lc}, Words: #{wc}"
-puts "Sentences #{sc}, Paragraphs #{pc}"
-puts "Average words per sentence #{avg_wps}"
-puts "Average sentences per paragraph #{avg_spp}"
+puts "Character: #{info[:cc]}, w/o spaces: #{info[:cc_wos]}"
+puts "Lines: #{info[:lc]}, Words: #{info[:wc]}"
+puts "Sentences #{info[:sc]}, Paragraphs #{info[:pc]}"
+puts "Average words per sentence #{info[:avg_wps]}"
+puts "Average sentences per paragraph #{info[:avg_spp]}"
