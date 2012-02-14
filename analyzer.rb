@@ -37,6 +37,6 @@ end
 
 puts "Character: #{info[:cc]}, w/o spaces: #{info[:cc_wos]}"
 puts "Lines: #{info[:lc]}, Words: #{info[:wc]}"
-puts "Sentences #{info[:sc]}, Paragraphs #{info[:pc]}"
-puts "Average words per sentence #{info[:avg_wps]}"
-puts "Average sentences per paragraph #{info[:avg_spp]}"
+puts "Sentences: #{info[:sc]}, Paragraphs: #{info[:pc]}"
+puts "Average words per sentence: %.1f" %info[:avg_wps]
+puts "Average sentences per paragraph: %.1f" %info[:avg_spp]
