@@ -29,8 +29,8 @@ if File.exists?(filename)
   end
   info[:cc] = data.pos
   info[:cc_wos] = info[:cc] - spaces
-  info[:avg_wps] = info[:wc]/info[:sc].round
-  info[:avg_spp] = info[:sc]/info[:pc].round
+  info[:avg_wps] = info[:wc]/info[:sc].round(1)
+  info[:avg_spp] = info[:sc]/info[:pc].round(1)
 else
   puts "File #{filename} does not exist"
 end
