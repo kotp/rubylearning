@@ -1,4 +1,4 @@
-while :true do
+while (input = gets.chomp).eql?('BYE') do
   print "You enter: "
   input = gets.chomp
   break if input.eql?('BYE')
